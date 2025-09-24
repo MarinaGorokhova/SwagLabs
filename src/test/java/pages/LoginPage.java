@@ -1,25 +1,29 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    WebDriver browser;
-
-    public LoginPage(WebDriver browser) {
-        this.browser = browser;
-    }
-
+public class LoginPage extends BasePage {
     private static final By INPUT_UN = By.xpath("//*[@placeholder='Username']");
     private static final By INPUT_PH = By.xpath("//*[@placeholder='Password']");
     private static final By CONTINUE_BTN = By.cssSelector("*[name='login-button']");
+    private static final By ERROR = By.xpath("//*[@data-test='error']");
 
-    public void open(){
-        browser.get("https://www.saucedemo.com");
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
-    public void loginThruZip(String login, String password){
-        browser.findElement(INPUT_UN).sendKeys(login);
-        browser.findElement(INPUT_PH).sendKeys(password);
-        browser.findElement(CONTINUE_BTN).click();
+    public void open() {
+        driver.get(BASE_URL + "/inventory.html");
+    }
+
+    public void loginThruZip(String login, String password) {
+        driver.findElement(INPUT_UN).sendKeys(login);
+        driver.findElement(INPUT_PH).sendKeys(password);
+        driver.findElement(CONTINUE_BTN).click();
+    }
+
+    public String checkErrorMsg() {
+        return driver.findElement(ERROR).getText();
     }
 }
