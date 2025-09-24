@@ -1,5 +1,4 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,10 +17,9 @@ public class LoginPage {
         browser.get("https://www.saucedemo.com");
     }
 
-    public void loginThruZip(String zipCode){
-        browser.findElement(INPUT_UN).sendKeys(zipCode);
-        browser.findElement(INPUT_PH).sendKeys("secret_sauce");
+    public void loginThruZip(String login, String password){
+        browser.findElement(INPUT_UN).sendKeys(login);
+        browser.findElement(INPUT_PH).sendKeys(password);
         browser.findElement(CONTINUE_BTN).click();
     }
 }
-

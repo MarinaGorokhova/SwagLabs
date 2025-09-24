@@ -4,18 +4,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
-
-
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public WebDriver browser;
-    LoginPage loginPage;;
+    LoginPage loginPage;
 
     @BeforeMethod
     public void setup(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
+        options.addArguments("--guest");
         browser = new ChromeDriver(options);
         browser.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         loginPage= new LoginPage(browser);
@@ -26,4 +25,3 @@ public class BaseTest {
         browser.quit();
     }
 }
-
