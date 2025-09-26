@@ -1,4 +1,7 @@
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import parents.BaseTest;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -12,27 +15,19 @@ public class UnTests extends BaseTest {
         assertTrue(isPresent);
     }
 
-    @Test
-    public void checkInvalidUsName() {
-        loginPage.open();
-        loginPage.loginThruZip("locked_out_user", "secret_sauce");
-        String errorMsg = loginPage.checkErrorMsg();
-        assertEquals(errorMsg, "Epic sadface: Sorry, this user has been locked out.");
+    @DataProvider()
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"}
+        };
     }
 
     @Test
-    public void checkWithoutUsername() {
+    public void checkIncorrectLogin(String user, String password, String errorMsg) {
         loginPage.open();
-        loginPage.loginThruZip("", "secret_sauce");
-        String errorMsg = loginPage.checkErrorMsg();
-        assertEquals(errorMsg, "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void checkWithoutPassword() {
-        loginPage.open();
-        loginPage.loginThruZip("standard_user", "");
-        String errorMsg = loginPage.checkErrorMsg();
-        assertEquals(errorMsg, "Epic sadface: Password is required");
+        loginPage.loginThruZip(user, password);
+        assertEquals(loginPage.checkErrorMsg(), errorMsg);
     }
 }
