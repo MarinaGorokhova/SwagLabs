@@ -1,3 +1,5 @@
+package parents;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,7 +22,7 @@ public class BaseTest {
         options.addArguments("--guest");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        loginPage= new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
     }
 
