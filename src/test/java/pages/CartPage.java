@@ -20,4 +20,15 @@ public class CartPage extends BasePage{
         }
         return names;
     }
+
+    public void removeFromCart(String productName) {
+        List<WebElement> cartItems = driver.findElements(By.className("cart_item"));
+        for (WebElement item : cartItems) {
+            String name = item.findElement(By.className("inventory_item_name")).getText();
+            if (name.equals(productName)) {
+                item.findElement(By.tagName("button")).click();
+                break;
+            }
+        }
+    }
 }
