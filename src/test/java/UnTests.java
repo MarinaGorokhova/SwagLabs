@@ -24,7 +24,7 @@ public class UnTests extends BaseTest {
         };
     }
 
-    @Test
+    @Test(dataProvider = "loginData")
     public void checkIncorrectLogin(String user, String password, String errorMsg) {
         loginPage.open();
         loginPage.loginThruZip(user, password);

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class ProductsPage extends BasePage {
     final By title = By.xpath("//span[@data-test='title']");
     final By title2 = By.xpath("//*[text()='Products']");
+    private static final By CART_LINK_LOCATOR = By.xpath("//*[@data-test='shopping-cart-link']");
     private static final By ADD_TO_CART_BUTTON = By.xpath("//*[text()='Add to cart']");
     private static final String ADD_TO_CART_BUTTON_PATTERN =
             "//*[text() = '%s']//ancestor::div[@class='inventory_item']//child::button[text()='Add to cart']";
@@ -30,5 +31,9 @@ public class ProductsPage extends BasePage {
 
     public void addToCart(int goodsName) {
         driver.findElements(ADD_TO_CART_BUTTON).get(goodsName).click();
+    }
+
+    public void openCart() {
+        driver.findElement(CART_LINK_LOCATOR).click();
     }
 }
