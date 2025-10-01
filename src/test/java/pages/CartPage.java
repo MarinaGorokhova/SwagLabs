@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartPage extends BasePage{
+    private static final By PRODUCTS_NAME_LOCATOR = By.cssSelector(".inventory_item_name");
+    private static final By CART_ITEMS_LOCATOR = By.className("cart_item");
+    private static final By ITEM_NAME_LOCATOR = By.className("inventory_item_name");
+
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
     public ArrayList<String> getProductsName() {
-        List<WebElement> allProductsNames = driver.findElements(By.cssSelector(".inventory_item_name"));
+        List<WebElement> allProductsNames = driver.findElements(PRODUCTS_NAME_LOCATOR);
         ArrayList<String> names = new ArrayList<>();
         for (WebElement product : allProductsNames) {
             names.add(product.getText());
@@ -22,9 +26,9 @@ public class CartPage extends BasePage{
     }
 
     public void removeFromCart(String productName) {
-        List<WebElement> cartItems = driver.findElements(By.className("cart_item"));
+        List<WebElement> cartItems = driver.findElements(CART_ITEMS_LOCATOR);
         for (WebElement item : cartItems) {
-            String name = item.findElement(By.className("inventory_item_name")).getText();
+           String name = item.findElement(ITEM_NAME_LOCATOR ).getText();
             if (name.equals(productName)) {
                 item.findElement(By.tagName("button")).click();
                 break;
