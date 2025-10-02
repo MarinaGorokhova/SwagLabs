@@ -5,7 +5,6 @@ import tests.parent.BaseTest;
 import user.UserFactory;
 
 import static org.testng.Assert.*;
-import static user.UserFactory.withAdminPermission;
 
 public class AddGoodsToCartTest extends BaseTest {
     @Test(description = "проверка товаров")
