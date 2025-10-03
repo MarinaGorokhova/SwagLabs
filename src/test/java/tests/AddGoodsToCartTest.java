@@ -1,13 +1,16 @@
+package tests;
+
 import org.testng.annotations.Test;
-import parents.BaseTest;
+import tests.parent.BaseTest;
+import user.UserFactory;
 
 import static org.testng.Assert.*;
 
 public class AddGoodsToCartTest extends BaseTest {
     @Test(description = "проверка товаров")
-    public void checkGoodsInCart() throws InterruptedException {
+    public void checkGoodsInCart() {
         loginPage.open();
-        loginPage.loginThruZip("standard_user", "secret_sauce");
+        loginPage.loginThruZip(UserFactory.withAdminPermission());
         assertEquals(productsPage.getTitle(), "Products", "Название не соответствует ожидаемому");
 
         productsPage.addToCart(0);
