@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import tests.parent.BaseTest;
@@ -12,6 +13,14 @@ import static user.UserFactory.*;
 
 public class LoginTest extends BaseTest {
 
+    @Epic("")
+    @Feature("")
+    @Story("")
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Горохова Марина marin-bojchenko@yandex.ru")
+    @TmsLink("SwagLabs")
+    @Issue("SwagLabs")
+    @Step("Проверка наличия заголовка страницы товаров после входа")
     @Test
     public void checkValidUsName() {
         loginPage.open();
@@ -31,6 +40,11 @@ public class LoginTest extends BaseTest {
         };
     }
 
+    @Severity(SeverityLevel.NORMAL)
+    @Owner("Горохова Марина marin-bojchenko@yandex.ru")
+    @TmsLink("SwagLabs")
+    @Issue("SwagLabs")
+    @Step("Проверка ошибки при некорректном логине для пользователя {user}")
     @Test(dataProvider = "loginData")
     public void checkIncorrectLogin(String user, String password, String errorMsg) {
         User testUser = new User(user, password);
