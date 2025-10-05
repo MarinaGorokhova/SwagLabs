@@ -7,6 +7,7 @@ import tests.parent.BaseTest;
 import user.User;
 import utils.PropertyReader;
 
+import static enums.ErrorMsg.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static user.UserFactory.*;
@@ -23,8 +24,8 @@ public class LoginTest extends BaseTest {
     @Step("Проверка наличия заголовка страницы товаров после входа")
     @Test
     public void checkValidUsName() {
-        loginPage.open();
-        loginPage.loginThruZip(withAdminPermission());
+        loginPage.open()
+                .loginThruZip(withAdminPermission());
         boolean isPresent = productsPage.isTitlePresent();
         assertTrue(isPresent);
     }
@@ -34,9 +35,9 @@ public class LoginTest extends BaseTest {
         String user = PropertyReader.getProperty("sandbox.user");
         String password = PropertyReader.getProperty("sandbox.password");
         return new Object[][]{
-                {"locked_out_user", password, "Epic sadface: Sorry, this user has been locked out."},
-                {"", password, "Epic sadface: Username is required"},
-                {user, "", "Epic sadface: Password is required"}
+                {"locked_out_user", password, USER_LOCKED_OUT.getDisplayName()},
+                {"", password, USERNAME_REQUIRED.getDisplayName()},
+                {user, "", PASSWORD_REQUIRED.getDisplayName()}
         };
     }
 
@@ -48,8 +49,8 @@ public class LoginTest extends BaseTest {
     @Test(dataProvider = "loginData")
     public void checkIncorrectLogin(String user, String password, String errorMsg) {
         User testUser = new User(user, password);
-        loginPage.open();
-        loginPage.loginThruZip(testUser);
+        loginPage.open()
+                .loginThruZip(testUser);
         assertEquals(loginPage.checkErrorMsg(), errorMsg);
     }
 }
