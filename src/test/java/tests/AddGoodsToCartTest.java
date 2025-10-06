@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import tests.parent.BaseTest;
 import user.UserFactory;
 
+import static enums.DepartmentNaming.*;
 import static org.testng.Assert.*;
 
 @Epic("")
@@ -18,13 +19,13 @@ public class AddGoodsToCartTest extends BaseTest {
     @Step("Тестирование корзины: добавление, проверка и удаление товаров")
     @Test(description = "проверка товаров")
     public void checkGoodsInCart() {
-        loginPage.open();
-        loginPage.loginThruZip(UserFactory.withAdminPermission());
-        assertEquals(productsPage.getTitle(), "Productss", "Название не соответствует ожидаемому");
+        loginPage.open()
+                .loginThruZip(UserFactory.withAdminPermission());
+        assertEquals(productsPage.getTitle(), PRODUCTS.getDisplayName(), "Название не соответствует ожидаемому");
 
-        productsPage.addToCart(0);
-        productsPage.addToCart(1);
-        productsPage.addToCart(2);
+        productsPage.addToCart(0)
+                .addToCart(1)
+                .addToCart(2);
 
         loginPage.open("/cart.html");
         assertTrue(cartPage.getProductsName().contains("Sauce Labs Backpack"));

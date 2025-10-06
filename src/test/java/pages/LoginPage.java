@@ -16,8 +16,9 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Открытие браузера")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL + "/inventory.html");
+        return this;
     }
 
     public void open(String url) {
@@ -25,22 +26,26 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Логинимся под кредами пользователя:логин= {user.email}, пароль= ******")
-    public void loginThruZip(User user) {
+    public LoginPage loginThruZip(User user) {
         fillLoginField(user.getEmail());
         fillPasswordField(user.getPassword());
         clickSubmit();
+        return this;
     }
 
-    public void fillLoginField(String login) {
+    public LoginPage fillLoginField(String login) {
         driver.findElement(INPUT_UN).sendKeys(login);
+        return this;
     }
 
-    public void fillPasswordField(String password) {
+    public LoginPage fillPasswordField(String password) {
         driver.findElement(INPUT_PH).sendKeys(password);
+        return this;
     }
 
-    public void clickSubmit() {
+    public LoginPage clickSubmit() {
         driver.findElement(CONTINUE_BTN).click();
+        return this;
     }
 
     public String checkErrorMsg() {

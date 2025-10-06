@@ -27,16 +27,19 @@ public class ProductsPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(title2)).isDisplayed();
     }
 
-    public void addToCart(String goodsName) {
+    public ProductsPage addToCart(String goodsName) {
         By addToCart = By.xpath(ADD_TO_CART_BUTTON_PATTERN.formatted(goodsName));
         driver.findElement(addToCart).click();
+        return this;
     }
 
-    public void addToCart(int goodsName) {
+    public ProductsPage addToCart(int goodsName) {
         driver.findElements(ADD_TO_CART_BUTTON).get(goodsName).click();
+        return this;
     }
 
-    public void openCart() {
+    public ProductsPage openCart() {
         driver.findElement(CART_LINK_LOCATOR).click();
+        return this;
     }
 }
